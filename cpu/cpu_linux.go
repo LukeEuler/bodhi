@@ -1,10 +1,10 @@
 package cpu
 
 import (
-	"regexp"
-	"strconv"
 	"bufio"
 	"os"
+	"regexp"
+	"strconv"
 )
 
 var cpuMap = map[string]string{

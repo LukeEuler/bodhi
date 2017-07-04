@@ -4,11 +4,11 @@ type FileSystem struct{}
 
 const name = "filesystem"
 
-func (self *FileSystem) Name() string {
+func (f *FileSystem) Name() string {
 	return name
 }
 
-func (self *FileSystem) Collect() (result interface{}, err error) {
+func (f *FileSystem) Collect() (result interface{}, err error) {
 	result, err = getFileSystemInfo()
 	return
 }
