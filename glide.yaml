@@ -1,0 +1,5 @@
+package: bodhi
+import:
+- package: golang.org/x/sys
+- package: github.com/shirou/gopsutil
+  version: ~2.17.6
