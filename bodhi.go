@@ -18,8 +18,6 @@ type Collector interface {
 	Collect() (interface{}, error)
 }
 
-type SelectedCollectors map[string]struct{}
-
 var collectors = []Collector{
 	&cpu.Cpu{},
 	&filesystem.FileSystem{},
