@@ -1,9 +1,7 @@
-package main
+package bodhi
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/LukeEuler/bodhi/cpu"
 	"github.com/LukeEuler/bodhi/filesystem"
@@ -40,20 +38,4 @@ func Collect() (result map[string]interface{}, err error) {
 		}
 	}
 	return
-}
-
-func main() {
-	result, err := Collect()
-
-	if err != nil {
-		panic(err)
-	}
-
-	buf, err := json.Marshal(result)
-
-	if err != nil {
-		panic(err)
-	}
-
-	os.Stdout.Write(buf)
 }
