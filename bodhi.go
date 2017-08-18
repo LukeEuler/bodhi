@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	"bodhi/cpu"
-	"bodhi/filesystem"
-	"bodhi/memory"
-	"bodhi/network"
-	"bodhi/platform"
-	"bodhi/processes"
+	"github.com/LukeEuler/bodhi/cpu"
+	"github.com/LukeEuler/bodhi/filesystem"
+	"github.com/LukeEuler/bodhi/memory"
+	"github.com/LukeEuler/bodhi/network"
+	"github.com/LukeEuler/bodhi/platform"
+	"github.com/LukeEuler/bodhi/processes"
 )
 
 type Collector interface {

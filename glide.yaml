@@ -1,4 +1,4 @@
-package: bodhi
+package: github.com/LukeEuler/bodhi
 import:
 - package: golang.org/x/sys
 - package: github.com/shirou/gopsutil

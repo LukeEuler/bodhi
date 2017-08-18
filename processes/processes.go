@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"bodhi/processes/gops"
+	"github.com/LukeEuler/bodhi/processes/gops"
 )
 
 type ProcessField [7]interface{}
