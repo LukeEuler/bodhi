@@ -26,14 +26,14 @@ func GetProcesses() ([]*ProcessInfo, error) {
 
 	virtMemStat, err := mem.VirtualMemory()
 	if err != nil {
-		err = fmt.Errorf("Error fetching system memory stats: %s", err)
+		err = fmt.Errorf("error fetching system memory stats: %s", err)
 		return nil, err
 	}
 	totalMem := float64(virtMemStat.Total)
 
 	pids, err := process.Pids()
 	if err != nil {
-		err = fmt.Errorf("Error fetching PIDs: %s", err)
+		err = fmt.Errorf("error fetching PIDs: %s", err)
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func GetProcesses() ([]*ProcessInfo, error) {
 
 		processInfo, err := newProcessInfo(p, pid, totalMem)
 		if err != nil {
-			fmt.Printf("Error fetching info for pid %d: %s", pid, err)
+			// fmt.Printf("Error fetching info for pid %d: %s", pid, err)
 			continue
 		}
 

@@ -33,7 +33,7 @@ func Collect() (result map[string]interface{}, err error) {
 	for _, item := range collectors {
 		c, err := item.Collect()
 		if err != nil {
-			fmt.Printf("[%s] %s", item.Name(), err)
+			fmt.Printf("[%s] %s\n", item.Name(), err)
 		}
 		if c != nil {
 			result[item.Name()] = c

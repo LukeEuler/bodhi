@@ -33,7 +33,7 @@ WAIT:
 		select {
 		case res := <-outCh:
 			if res != nil {
-				out, err = parseDfOutput(string(res))
+				out = parseDfOutput(string(res))
 			} else {
 				out, err = nil, fmt.Errorf("df failed to collect filesystem data")
 			}

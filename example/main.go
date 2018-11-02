@@ -1,18 +1,20 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/LukeEuler/bodhi"
 )
 
 func main() {
-	result, err := bodhi.Collect()
+	collects, err := bodhi.Collect()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println()
-	for key, value := range result {
-		fmt.Println(key, value)
+	bytes, err := json.Marshal(collects)
+	if err != nil {
+		fmt.Println(err)
 	}
+	fmt.Println(string(bytes))
 }
