@@ -35,7 +35,7 @@ WAIT:
 		select {
 		case res := <-outCh:
 			if res != nil {
-				out, err = parseDfOutput(string(res))
+				out = parseDfOutput(string(res))
 			} else {
 				out, err = nil, fmt.Errorf("df failed to collect filesystem data")
 			}
@@ -56,14 +56,14 @@ WAIT:
 	return out, err
 }
 
-func parseDfOutput(out string) (interface{}, error) {
+func parseDfOutput(out string) interface{} {
 	lines := strings.Split(out, "\n")
-	var fileSystemInfo []interface{} = make([]interface{}, len(lines)-2)
+	var fileSystemInfo = make([]interface{}, len(lines)-2)
 	for i, line := range lines[1:] {
-		values := regexp.MustCompile("\\s+").Split(line, expectedLength)
+		values := regexp.MustCompile(`\\s+`).Split(line, expectedLength)
 		if len(values) == expectedLength {
 			fileSystemInfo[i] = updatefileSystemInfo(values)
 		}
 	}
-	return fileSystemInfo, nil
+	return fileSystemInfo
 }

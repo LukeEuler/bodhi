@@ -8,14 +8,17 @@ import (
 	"strings"
 )
 
+// Platform ...
 type Platform struct{}
 
 const name = "platform"
 
+// Name implement Collector's
 func (p *Platform) Name() string {
 	return name
 }
 
+// Collect implement Collector's
 func (p *Platform) Collect() (result interface{}, err error) {
 	result, err = getPlatformInfo()
 	return

@@ -1,4 +1,4 @@
-// Extract the information on running processes from gopsutil
+// Package gops Extract the information on running processes from gopsutil
 package gops
 
 import (
@@ -9,6 +9,7 @@ import (
 	"github.com/shirou/gopsutil/process"
 )
 
+// ProcessInfo ...
 type ProcessInfo struct {
 	PID      int32
 	PPID     int32
@@ -19,7 +20,7 @@ type ProcessInfo struct {
 	Username string
 }
 
-// Return a slice of all the processes that are running
+// GetProcesses Return a slice of all the processes that are running
 func GetProcesses() ([]*ProcessInfo, error) {
 	processInfos := make([]*ProcessInfo, 0, 10)
 

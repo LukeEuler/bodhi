@@ -4,7 +4,7 @@ import (
 	"sort"
 )
 
-// Represents a group of processes, grouped by name
+// ProcessNameGroup Represents a group of processes, grouped by name
 type ProcessNameGroup struct {
 	pids      []int32
 	rss       uint64
@@ -14,32 +14,38 @@ type ProcessNameGroup struct {
 	usernames map[string]bool
 }
 
+// ProcessNameGroups ...
 type ProcessNameGroups []*ProcessNameGroup
 
+// Pids ...
 func (pg *ProcessNameGroup) Pids() []int32 {
 	return pg.pids
 }
 
+// Name ...
 func (pg *ProcessNameGroup) Name() string {
 	return pg.name
 }
 
+// RSS ...
 func (pg *ProcessNameGroup) RSS() uint64 {
 	return pg.rss
 }
 
+// PctMem ...
 func (pg *ProcessNameGroup) PctMem() float64 {
 	return pg.pctMem
 }
 
+// VMS ...
 func (pg *ProcessNameGroup) VMS() uint64 {
 	return pg.vms
 }
 
-// Return a slice of the usernames, sorted alphabetically
+// Usernames Return a slice of the usernames, sorted alphabetically
 func (pg *ProcessNameGroup) Usernames() []string {
 	var usernameStringSlice sort.StringSlice
-	for username, _ := range pg.usernames {
+	for username := range pg.usernames {
 		usernameStringSlice = append(usernameStringSlice, username)
 	}
 
@@ -48,6 +54,7 @@ func (pg *ProcessNameGroup) Usernames() []string {
 	return []string(usernameStringSlice)
 }
 
+// NewProcessNameGroup ...
 func NewProcessNameGroup() *ProcessNameGroup {
 	processNameGroup := new(ProcessNameGroup)
 	processNameGroup.usernames = make(map[string]bool)
@@ -55,7 +62,7 @@ func NewProcessNameGroup() *ProcessNameGroup {
 	return processNameGroup
 }
 
-// Group the processInfos by name and return a slice of ProcessNameGroup
+// GroupByName Group the processInfos by name and return a slice of ProcessNameGroup
 func GroupByName(processInfos []*ProcessInfo) ProcessNameGroups {
 	groupIndexByName := make(map[string]int)
 	processNameGroups := make(ProcessNameGroups, 0, 10)
@@ -83,19 +90,22 @@ func (pg *ProcessNameGroup) add(p *ProcessInfo) {
 	pg.usernames[p.Username] = true
 }
 
-// Sort slices of process groups
+// Len Sort slices of process groups
 func (s ProcessNameGroups) Len() int {
 	return len(s)
 }
 
+// Swap ...
 func (s ProcessNameGroups) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
 }
 
+// ByRSSDesc ...
 type ByRSSDesc struct {
 	ProcessNameGroups
 }
 
+// Less ...
 func (s ByRSSDesc) Less(i, j int) bool {
 	return s.ProcessNameGroups[i].RSS() > s.ProcessNameGroups[j].RSS()
 }

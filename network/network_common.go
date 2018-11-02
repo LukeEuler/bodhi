@@ -5,19 +5,23 @@ import (
 	"net"
 )
 
+// Network ...
 type Network struct{}
 
 const name = "network"
 
+// Name implement Collector's
 func (n *Network) Name() string {
 	return name
 }
 
+// Collect implement Collector's
 func (n *Network) Collect() (result interface{}, err error) {
 	result, err = getNetworkInfo()
 	return
 }
 
+// Ipv6Address ...
 type Ipv6Address struct{}
 
 func externalIpv6Address() (string, error) {
@@ -62,9 +66,10 @@ func externalIpv6Address() (string, error) {
 	return "", nil
 }
 
-type IpAddress struct{}
+// IPAddress ...
+type IPAddress struct{}
 
-func externalIpAddress() (string, error) {
+func externalIPAddress() (string, error) {
 	ifaces, err := net.Interfaces()
 
 	if err != nil {
@@ -102,6 +107,7 @@ func externalIpAddress() (string, error) {
 	return "", errors.New("not connected to the network")
 }
 
+// MacAddress ...
 type MacAddress struct{}
 
 func macAddress() (string, error) {

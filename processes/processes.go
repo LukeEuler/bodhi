@@ -9,6 +9,7 @@ import (
 	"github.com/LukeEuler/bodhi/processes/gops"
 )
 
+// ProcessField ...
 type ProcessField [7]interface{}
 
 // Return a JSON payload that's compatible with the legacy "processes" resource check

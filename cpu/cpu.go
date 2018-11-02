@@ -1,14 +1,17 @@
 package cpu
 
-type Cpu struct{}
+// CPU ...
+type CPU struct{}
 
 const name = "cpu"
 
-func (c *Cpu) Name() string {
+// Name implement Collector's
+func (c *CPU) Name() string {
 	return name
 }
 
-func (c *Cpu) Collect() (result interface{}, err error) {
-	result, err = getCpuInfo()
+// Collect implement Collector's
+func (c *CPU) Collect() (result interface{}, err error) {
+	result, err = getCPUInfo()
 	return
 }

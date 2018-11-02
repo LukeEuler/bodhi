@@ -11,13 +11,14 @@ import (
 	"github.com/LukeEuler/bodhi/processes"
 )
 
+// Collector ...
 type Collector interface {
 	Name() string
 	Collect() (interface{}, error)
 }
 
 var collectors = []Collector{
-	&cpu.Cpu{},
+	&cpu.CPU{},
 	&filesystem.FileSystem{},
 	&memory.Memory{},
 	&network.Network{},
@@ -25,16 +26,17 @@ var collectors = []Collector{
 	&processes.Processes{},
 }
 
+// Collect ...
 func Collect() (result map[string]interface{}, err error) {
 	result = make(map[string]interface{})
 
-	for _, collector := range collectors {
-		c, err := collector.Collect()
+	for _, item := range collectors {
+		c, err := item.Collect()
 		if err != nil {
-			fmt.Printf("[%s] %s", collector.Name(), err)
+			fmt.Printf("[%s] %s", item.Name(), err)
 		}
 		if c != nil {
-			result[collector.Name()] = c
+			result[item.Name()] = c
 		}
 	}
 	return
