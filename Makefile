@@ -1,50 +1,30 @@
 all: build
 
-GLIDE := $(shell command -v glide 2> /dev/null)
-GOFMT := $(shell command -v gofmt 2> /dev/null)
+MODULE = "github.com/LukeEuler/bodhi"
+
 GOIMPORTS := $(shell command -v goimports 2> /dev/null)
-GOLINT :=  $(shell command -v golint 2> /dev/null)
 CILINT := $(shell command -v golangci-lint 2> /dev/null)
 
 style: clean
-ifndef GOFMT
-	$(error "gofmt is not available please install gofmt")
-endif
 ifndef GOIMPORTS
 	$(error "goimports is not available please install goimports")
 endif
-	@echo ">> checking code style"
-	@! find . -path ./vendor -prune -o -name '*.go' -print | xargs gofmt -d | grep '^'
-	@! find . -path ./vendor -prune -o -name '*.go' -print | xargs goimports -d | grep '^'
+	! find . -path ./vendor -prune -o -name '*.go' -print | xargs goimports -d -local ${MODULE} | grep '^'
 
 format:
-ifndef GOFMT
-	$(error "gofmt is not available please install gofmt")
-endif
 ifndef GOIMPORTS
 	$(error "goimports is not available please install goimports")
 endif
-	@echo ">> formatting code"
-	@glide nv | xargs go fmt
-	@find . -path ./vendor -prune -o -name '*.go' -print | xargs goimports -l | xargs goimports -w
-	@echo ">> done"
-
-lint:
-ifndef GOLINT
-	$(error "golint is not available please install golint")
-endif
-	@echo ">> checking code lint"
-	@! go list ./... | grep -v -e "updater\/plugin\/trx\/api" -e "updater\/plugin\/trx\/core" | xargs golint | sed "s:^$(CURRENT_DIR)/::" | grep '^'
+	find . -path ./vendor -prune -o -name '*.go' -print | xargs goimports -l -local ${MODULE} | xargs goimports -l -local ${MODULE} -w
 
 cilint:
 ifndef CILINT
 	$(error "golangci-lint is not available please install golangci-lint")
 endif
-	@golangci-lint run
+	golangci-lint run
 
-test: style lint
-	@echo ">> testing"
-	@glide nv | xargs go test -cover
+test: style cilint
+	go test -cover ./...
 
 build: test
 	go build -o build/bodhi example/main.go
@@ -54,3 +34,5 @@ linux: test
 
 clean:
 	@rm -rf build
+
+.PHONY: all style format cilint test build linux

@@ -3,6 +3,7 @@ package gops
 
 import (
 	"fmt"
+	"runtime"
 
 	// project
 	"github.com/shirou/gopsutil/mem"
@@ -79,9 +80,12 @@ func newProcessInfo(p *process.Process, pid int32, totalMem float64) (*ProcessIn
 
 	pctMem := 100. * float64(memInfo.RSS) / totalMem
 
-	username, err := p.Username()
-	if err != nil {
-		return nil, err
+	var username string
+	if runtime.GOOS != "android" {
+		username, err = p.Username()
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &ProcessInfo{pid, ppid, name, memInfo.RSS, pctMem, memInfo.VMS, username}, nil

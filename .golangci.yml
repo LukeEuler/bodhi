@@ -79,3 +79,5 @@ linters:
     - gocyclo
     - gas
     - nakedret
+    - gochecknoglobals
+    - gochecknoinits

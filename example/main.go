@@ -12,7 +12,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	bytes, err := json.Marshal(collects)
+	bytes, err := json.MarshalIndent(collects, "", " ")
 	if err != nil {
 		fmt.Println(err)
 	}
