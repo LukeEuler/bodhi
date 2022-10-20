@@ -1,12 +1,17 @@
 module github.com/LukeEuler/bodhi
 
+go 1.18
+
 require (
-	github.com/StackExchange/wmi v0.0.0-20170410192909-ea383cf3ba6e // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-ole/go-ole v0.0.0-20170712174622-085abb85892d // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/shirou/gopsutil v2.18.10+incompatible
-	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/stretchr/testify v1.2.2 // indirect
-	golang.org/x/sys v0.0.0-20170329061634-9a7256cb28ed
+	github.com/shirou/gopsutil/v3 v3.22.9
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a
+)
+
+require (
+	github.com/go-ole/go-ole v1.2.6 // indirect
+	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
+	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
+	github.com/tklauser/go-sysconf v0.3.10 // indirect
+	github.com/tklauser/numcpus v0.4.0 // indirect
+	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 )
